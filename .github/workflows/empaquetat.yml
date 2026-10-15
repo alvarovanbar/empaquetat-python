@@ -10,3 +10,21 @@ jobs:
           python-version: "3.12"
       - run: pip install pyinstaller
       - run: pyinstaller --onefile comprova_desplegaments.py
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyinstaller
+      - run: pyinstaller --onefile comprova_desplegaments.py
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyinstaller
+      - run: pyinstaller --onefile comprova_desplegaments.py
