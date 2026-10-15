@@ -10,6 +10,10 @@ jobs:
           python-version: "3.12"
       - run: pip install pyinstaller
       - run: pyinstaller --onefile comprova_desplegaments.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ejecutable-linux
+          path: dist/comprova_desplegaments
   build-macos:
     runs-on: macos-latest
     steps:
@@ -19,6 +23,10 @@ jobs:
           python-version: "3.12"
       - run: pip install pyinstaller
       - run: pyinstaller --onefile comprova_desplegaments.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ejecutable-macos
+          path: dist/comprova_desplegaments
   build-windows:
     runs-on: windows-latest
     steps:
@@ -28,3 +36,16 @@ jobs:
           python-version: "3.12"
       - run: pip install pyinstaller
       - run: pyinstaller --onefile comprova_desplegaments.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ejecutable-windows
+          path: dist/comprova_desplegaments.exe
+  comprova:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: ejecutable-linux
+      - run: chmod +x comprova_desplegaments
+      - run: ./comprova_desplegaments example.com
